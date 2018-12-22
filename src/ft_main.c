@@ -92,7 +92,7 @@ int ComplexHeatMap(int value, int min, int max, t_vertex z, double r)
 
 #include <stdio.h>
 
-void		ft_test(t_data *data, int maxIter, float dw)
+void		ft_test(t_data *data, int maxIter, float dw, float dx)
 {
 	float		r;
 	float		r2;
@@ -109,8 +109,9 @@ void		ft_test(t_data *data, int maxIter, float dw)
 
 	if (dw < 1)
 		return ;
+	c = ft_vertex_init(dx, -0.11301);//f(z) = z2 — 0.74543 + 0.11301i
 //	c = ft_vertex_init(data->c[0], data->c[1]);//f(z) = z2 — 0.74543 + 0.11301i
-	c = ft_vertex_init(-0.74543, -0.11301);//f(z) = z2 — 0.74543 + 0.11301i
+//	c = ft_vertex_init(-0.74543, -0.11301);//f(z) = z2 — 0.74543 + 0.11301i
 //	c = ft_vertex_init(-0.8, -0.156);//f(z) = z2 — 0.8 + 0.156i
 //	c = ft_vertex_init(0.285, 0.01);//f(z) = z2 + 0.285 + 0.01i
 //	c = ft_vertex_init(-0.0085, -0.71);//f(z) = z2 — 0.0085 + 0.71i
@@ -177,7 +178,7 @@ int			draw(t_data *data)
 		data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr,
 		&data->img.bpp, &data->img.size_l, &data->img.endian);
 //	ft_triangle(data);
-	ft_test(data, data->iter, data->scale);
+	ft_test(data, 100, data->scale, data->dx);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
 //	exit(0);
@@ -189,9 +190,8 @@ int			main(int argc, char **argv)
 	srand(time(NULL));
 	t_data	data;
 
-	PRIN_RET((argc != 3), "usage: ./fdf source_file");
+	PRIN_RET((argc != 2), "usage: ./fdf source_file scale");
 	data.scale = ft_atoi(argv[1]);
-	data.iter = ft_atoi(argv[2]);
 //	data.c = (float *)malloc(sizeof(float) * 2);
 //	data.c[0] = -0.74543;
 //	data.c[1] = -0.11301;
@@ -201,6 +201,7 @@ int			main(int argc, char **argv)
 		return (1);
 	mlx_expose_hook(data.mlx_win, draw, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 3, key_release, &data);
+	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_move, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
 }

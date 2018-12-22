@@ -58,8 +58,8 @@ typedef struct	s_data
 	void			*mlx_ptr;
 	void			*mlx_win;
 	t_img			img;
-	int				iter;
 	float			scale;
+	float			dx;
 }				t_data;
 
 int				draw(t_data *data);
@@ -68,6 +68,7 @@ void			ft_draw_vertex(t_data *data, t_vertex *dot, int color);
 void			line_fast(t_data *env, float *p1, float *p2, int color);
 void			clearwin(t_data *data);
 int				key_release(int key, t_data *data);
+int				mouse_move(int x, int y, t_data *data);
 void			ft_triangle(t_data *data);
 t_vertex		ft_vertex_init(float x, float y);
 

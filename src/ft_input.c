@@ -20,15 +20,28 @@ int			key_release(int key, t_data *data)
 	if (key == 53)
 		exit(0);
 	else if (key == 0)
-		data->iter -= 10;
+		data->scale += 1;
 	else if (key == 2)
-		data->iter += 10;
+		data->scale -= 1;
 	else if (key == 13)
 		data->scale += 1;
 	else if (key == 1)
 		data->scale -= 1;
-	printf("iter = %d\n", data->iter);
 	printf("scale = %f\n", data->scale);
 	draw(data);
 	return (1);
+}
+
+int			mouse_move(int x, int y, t_data *data)
+{
+	float	dx;
+	dx = (x - WIN_W2) / (float)(WIN_W2 + 10);
+	if (dx > -1 && dx < 1)
+	{
+		clearwin(data);
+		data->dx = dx;
+		draw(data);
+	}
+	printf("data->dx = %f\n", data->dx);
+	return (0);
 }
