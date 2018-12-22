@@ -100,7 +100,6 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 	float		min[2];
 	float		max[2];
 	float		step[2];
-	int			maxIdx;
 	t_vertex	z;
 	int			i;
 	int			j;
@@ -132,7 +131,6 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 	step[Y_P] = fabsf((max[Y_P] - min[Y_P])) / (float)(WIN_H);
 //	printf("fstep[X_P]=%f\n", step[X_P]);
 //	printf("fstep[Y_P]=%f\n", step[Y_P]);
-	maxIdx = 0;
 	if ((xyIdx = (int *)malloc(sizeof(int) * WIN_W * WIN_H)) == 0)
 		return ;
 	i = -1;
@@ -147,28 +145,24 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 			z.p[X_P] = min[X_P] + i * step[X_P];
 			z.p[Y_P] = min[Y_P] + j * step[Y_P];
 			idx = ft_get_idx(&z, r2, &c, maxIter) - 1;
-			if (maxIdx < idx)
-				maxIdx = idx;
 			xyIdx[i + j * (WIN_W)] = idx;
 			xyIdx[(WIN_W - i - 1) + (WIN_H - j - 1) * (WIN_W)] = idx;
 		}
 	}
 //	exit(0);
-	ft_putstr("maxIdx=");
-	ft_putendl(ft_itoa(maxIdx));
 	i = -1;
 	while (++i < (WIN_W))
 	{
 		j = -1;
-		while (++j < (WIN_H))
+		while (++j < (WIN_H2))
 		{
 			z.p[X_P] = min[X_P] + i * step[X_P];
 			z.p[Y_P] = min[Y_P] + j * step[Y_P];
 			ft_draw_px(data, (WIN_W) - i - 1, j, ComplexHeatMap(xyIdx[i + j * (WIN_W)], 0, maxIter, z, r2));
+			ft_draw_px(data, i, (WIN_H - j - 1), ComplexHeatMap(xyIdx[i + j * (WIN_W)], 0, maxIter, z, r2));
 		}
 	}
 	free(xyIdx);
-//	ft_putendl("over\n");
 }
 
 int			draw(t_data *data)
@@ -179,10 +173,10 @@ int			draw(t_data *data)
 		data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr,
 		&data->img.bpp, &data->img.size_l, &data->img.endian);
 //	ft_triangle(data);
-	ft_test(data, 100, data->scale, data->dx);
+	ft_test(data, 1000, data->scale, data->dx);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
-//	exit(0);
+	exit(0);
 	return (1);
 }
 
@@ -193,6 +187,7 @@ int			main(int argc, char **argv)
 
 	PRIN_RET((argc != 2), "usage: ./fdf source_file scale");
 	data.scale = ft_atoi(argv[1]);
+	data.dx = -0.75;
 //	data.c = (float *)malloc(sizeof(float) * 2);
 //	data.c[0] = -0.74543;
 //	data.c[1] = -0.11301;
