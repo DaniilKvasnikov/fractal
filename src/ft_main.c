@@ -142,7 +142,7 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 	while (++i < (WIN_W))
 	{
 		j = -1;
-		while (++j < (WIN_H))
+		while (++j < (WIN_H2))
 		{
 			z.p[X_P] = min[X_P] + i * step[X_P];
 			z.p[Y_P] = min[Y_P] + j * step[Y_P];
@@ -150,6 +150,7 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 			if (maxIdx < idx)
 				maxIdx = idx;
 			xyIdx[i + j * (WIN_W)] = idx;
+			xyIdx[(WIN_W - i - 1) + (WIN_H - j - 1) * (WIN_W)] = idx;
 		}
 	}
 //	exit(0);
@@ -163,7 +164,7 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 		{
 			z.p[X_P] = min[X_P] + i * step[X_P];
 			z.p[Y_P] = min[Y_P] + j * step[Y_P];
-			ft_draw_px(data, (WIN_W) - i - 1, j, ComplexHeatMap(xyIdx[i + j * (WIN_W)], 0, maxIdx, z, r2));
+			ft_draw_px(data, (WIN_W) - i - 1, j, ComplexHeatMap(xyIdx[i + j * (WIN_W)], 0, maxIter, z, r2));
 		}
 	}
 	free(xyIdx);
