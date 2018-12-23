@@ -71,5 +71,6 @@ int				key_release(int key, t_data *data);
 int				mouse_move(int x, int y, t_data *data);
 void			ft_triangle(t_data *data);
 t_vertex		ft_vertex_init(float x, float y);
+int				frame(t_data *data, double pcenter, double qcenter, double range);
 
 #endif

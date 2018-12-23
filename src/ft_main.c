@@ -47,18 +47,6 @@ float		ft_calc_r(t_vertex *p)
 	return (1 + sqrt(1 + 4 * ft_com_mod(p)) / 2);
 }
 
-void		line_fast_test(t_data *data, float *p1, float *p2, int color)
-{
-	float	s[2];
-	float	f[2];
-
-	s[0] = p1[0] * 500;
-	s[1] = p1[1] * 500;
-	f[0] = p2[0] * 500;
-	f[1] = p2[1] * 500;
-	line_fast(data, s, f, color);
-}
-
 int			ft_get_idx(t_vertex *z0, float r, t_vertex *c, int n)
 {
 	t_vertex	res;
@@ -90,8 +78,6 @@ int ComplexHeatMap(int value, int min, int max, t_vertex z, double r)
 			(255 * (ft_com_mod2(&z) / r > 1 ? 1 : ft_com_mod2(&z) / r)));
 }
 
-#include <stdio.h>
-
 void		ft_test(t_data *data, int maxIter, float dw, float dx)
 {
 	float		r;
@@ -108,13 +94,7 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 
 	if (dw < 1)
 		return ;
-	c = ft_vertex_init(dx, -0.11301);//f(z) = z2 — 0.74543 + 0.11301i
-//	c = ft_vertex_init(data->c[0], data->c[1]);//f(z) = z2 — 0.74543 + 0.11301i
-//	c = ft_vertex_init(-0.74543, -0.11301);//f(z) = z2 — 0.74543 + 0.11301i
-//	c = ft_vertex_init(-0.8, -0.156);//f(z) = z2 — 0.8 + 0.156i
-//	c = ft_vertex_init(0.285, 0.01);//f(z) = z2 + 0.285 + 0.01i
-//	c = ft_vertex_init(-0.0085, -0.71);//f(z) = z2 — 0.0085 + 0.71i
-	line_fast_test(data, c.p, c.p, 0xff0000);
+	c = ft_vertex_init(dx, -0.11301);
 	r = ft_calc_r(&c);
 	if (r <= 0)
 		return ;
@@ -123,20 +103,11 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 	max[X_P] = r / dw;
 	max[Y_P] = r / dw;
 	r2 = (r * r);
-//	printf("fmin[X_P]=%f\n", min[X_P]);
-//	printf("fmax[X_P]=%f\n", max[X_P]);
-//	printf("fmin[Y_P]=%f\n", min[Y_P]);
-//	printf("fmax[Y_P]=%f\n", max[Y_P]);
 	step[X_P] = fabsf((max[X_P] - min[X_P])) / (float)(WIN_W);
 	step[Y_P] = fabsf((max[Y_P] - min[Y_P])) / (float)(WIN_H);
-//	printf("fstep[X_P]=%f\n", step[X_P]);
-//	printf("fstep[Y_P]=%f\n", step[Y_P]);
 	if ((xyIdx = (int *)malloc(sizeof(int) * WIN_W * WIN_H)) == 0)
 		return ;
 	i = -1;
-//	exit(0);
-//	printf("r=%f\n", r);
-//	printf("r2=%f\n", r2);
 	while (++i < (WIN_W))
 	{
 		j = -1;
@@ -149,7 +120,6 @@ void		ft_test(t_data *data, int maxIter, float dw, float dx)
 			xyIdx[(WIN_W - i - 1) + (WIN_H - j - 1) * (WIN_W)] = idx;
 		}
 	}
-//	exit(0);
 	i = -1;
 	while (++i < (WIN_W))
 	{
@@ -173,10 +143,11 @@ int			draw(t_data *data)
 		data->img.data = (int *)mlx_get_data_addr(data->img.img_ptr,
 		&data->img.bpp, &data->img.size_l, &data->img.endian);
 //	ft_triangle(data);
-	ft_test(data, 1000, data->scale, data->dx);
+//	ft_test(data, 1000, data->scale, data->dx);
+	frame(data, -0.743643900055, 0.131825890901, 0.000000049304);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
-	exit(0);
+//	exit(0);
 	return (1);
 }
 
@@ -188,9 +159,6 @@ int			main(int argc, char **argv)
 	PRIN_RET((argc != 2), "usage: ./fdf source_file scale");
 	data.scale = ft_atoi(argv[1]);
 	data.dx = -0.75;
-//	data.c = (float *)malloc(sizeof(float) * 2);
-//	data.c[0] = -0.74543;
-//	data.c[1] = -0.11301;
 	if (((data.mlx_ptr = mlx_init()) == 0) ||
 		((data.mlx_win =
 		mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, argv[0])) == NULL))
