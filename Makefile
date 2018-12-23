@@ -6,7 +6,7 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 13:06:44 by rrhaenys          #+#    #+#              #
-#    Updated: 2018/12/20 18:46:04 by rrhaenys         ###   ########.fr        #
+#    Updated: 2018/12/23 20:18:59 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ COMMAND = gcc
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ)
-	$(COMMAND) -o $(NAME) -g $(OBJ) $(LIB) $(INCLUDE) $(MLX) 
+	$(COMMAND) -o $(NAME) -g $(OBJ) $(LIB) $(INCLUDE) $(MLX)
 
 $(LIB):
 	make -C ./libft
@@ -37,6 +37,7 @@ clean:
 	/bin/rm -f $(OBJ)
 
 fclean: clean
+	make -C ./libft fclean
 	/bin/rm -f $(NAME)
 
 re: fclean all
