@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 01:17:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 05:08:53 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 07:11:46 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,33 @@ void		clearwin(t_data *data)
 		data->img.data[index] = 0x000000;
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
+}
+
+void		line_fast(t_data *env, float *p1, float *p2, int color)
+{
+	int i;
+	int x[2];
+	int p[2];
+
+	x[0] = abs((int)(p2[Y_P] - p1[Y_P])) >> 1;
+	x[1] = abs((int)(p2[X_P] - p1[X_P])) >> 1;
+	ft_draw_px(env, (p[0] = p1[X_P]),
+				(p[1] = p1[Y_P]), color);
+	if (((i = -1) == -1) && abs((int)(p2[X_P] - p1[X_P])) >=
+		abs((int)(p2[Y_P] - p1[Y_P])))
+		while (++i < abs((int)(p2[X_P] - p1[X_P])))
+		{
+			BLOCK_2(x[1], abs((int)(p2[X_P] - p1[X_P])), p[1],
+			SGN(p2[Y_P] - p1[Y_P]), abs((int)(p2[Y_P] - p1[Y_P])));
+			ft_draw_px(env, (p[0] += SGN(p2[X_P] - p1[X_P])), p[1], color);
+		}
+	else
+		while (++i < abs((int)(p2[Y_P] - p1[Y_P])))
+		{
+			BLOCK_2(x[0], abs((int)(p2[Y_P] - p1[Y_P])), p[0],
+			SGN(p2[X_P] - p1[X_P]), abs((int)(p2[X_P] - p1[X_P])));
+			ft_draw_px(env, p[0], (p[1] += SGN(p2[Y_P] - p1[Y_P])), color);
+		}
 }
 
 static void	draw_status(t_data *data)
@@ -68,6 +95,8 @@ int			draw(t_data *data)
 		ft_draw_julia(data);
 	else if (data->display->type == 2)
 		ft_triangle(data);
+	else if (data->display->type == 3)
+		ft_kochs_snowflake(data);
 	ft_draw_px(data, WIN_W2, WIN_H2, 0xff0000);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);

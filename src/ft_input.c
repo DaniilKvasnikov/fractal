@@ -6,16 +6,14 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 05:09:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 06:40:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 int			key_release(int key, t_data *data)
 {
-	printf("key = %d\n", key);
 	if (key == 53)
 		exit(0);
 	else if (key == 49)
@@ -42,7 +40,6 @@ int			key_release(int key, t_data *data)
 
 int			mouse_move(int x, int y, t_data *data)
 {
-	printf("x=%d y=%d\n", x, y);
 	if (x >= 0 && x < WIN_W &&
 		y >= 0 && y < WIN_H &&
 		data->display->type == 1 &&
@@ -62,7 +59,6 @@ int			mouse_press(int button, int x, int y, t_data *data)
 {
 	float scale;
 
-	printf("key = %d\n", button);
 	clearwin(data);
 	if (data->display->type == 0)
 		scale = data->display->scale;
@@ -82,6 +78,5 @@ int			mouse_press(int button, int x, int y, t_data *data)
 		data->display->global_y -= 2 * ((y - WIN_H2) * scale) / (float)WIN_W2;
 	}
 	draw(data);
-	printf("scale = %f\n", data->display->scale);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 04:40:58 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 07:11:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 # define PRIN_RET(a,s) {if (a){ft_putendl(s); return (0);}}
 # define X_P 0
 # define Y_P 1
+# define BLOCK_1(a, b, c, d) {a -= b; c += d;}
+# define BLOCK_2(a, b, c, d, e) {if ((a += e) >= b) BLOCK_1(a, b, c, d);}
+# define SGN(x) ((x < 0) ? -1 : ((x > 0) ? 1 : 0))
+
+typedef struct	s_kochs
+{
+	float		p1[2];
+	float		p2[2];
+	float		p3[2];
+}				t_kochs;
 
 typedef struct	s_display
 {
@@ -66,7 +76,7 @@ int				ft_close(t_data *data);
 void			ft_draw_px(t_data *env, int x, int y, int color);
 void			clearwin(t_data *data);
 int				draw(t_data *data);
-void			test_draw(t_data *data);
+void			line_fast(t_data *env, float *p1, float *p2, int color);
 void			ft_draw_mandelbrot(t_data *data);
 void			ft_calc_mandelbrot(double range,
 				double *min, int nmax, int *pres);
@@ -74,5 +84,7 @@ int				ft_get_color_mandelbrot(int n, int nmax);
 void			ft_draw_julia(t_data *data);
 int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
 int				ft_get_color_julia(int value, int max, float *p, double r);
+void			ft_triangle(t_data *data);
+void			ft_kochs_snowflake(t_data *data);
 
 #endif
