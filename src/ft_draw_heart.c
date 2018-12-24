@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 01:17:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:31:01 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 12:48:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		ft_draw_px(t_data *env, int x, int y, int color)
 {
 	float z;
 
+	if (env->img.size_l <= 100)
+		return ;
 	x = (int)(x);
 	y = (int)(WIN_H - y - 1);
 	z = x + (y * WIN_W);
@@ -30,6 +32,8 @@ void		clearwin(t_data *data)
 	int index;
 	int size;
 
+	if (data->img.size_l <= 100)
+		return ;
 	index = -1;
 	size = WIN_W * WIN_H;
 	while (++index < size)
@@ -67,19 +71,25 @@ void		line_fast(t_data *env, float *p1, float *p2, int color)
 
 static void	draw_status(t_data *data)
 {
+	char *str;
+
 	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 0, 0xffffff, "scale=");
 	if (data->display->scale >= 1)
 		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff,
-			ft_itoa(data->display->scale));
+			(str = ft_itoa(data->display->scale)));
 	else
 	{
 		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff, "1/");
 		mlx_string_put(data->mlx_ptr, data->mlx_win, 80, 0, 0xffffff,
-			ft_itoa(1 / data->display->scale));
+			(str = ft_itoa(1 / data->display->scale)));
 	}
+	if (str != NULL)
+		free(str);
 	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 20, 0xffffff, "iter=");
 	mlx_string_put(data->mlx_ptr, data->mlx_win, 50, 20, 0xffffff,
-		ft_itoa(data->display->max_iter));
+		(str = ft_itoa(data->display->max_iter)));
+	if (str != NULL)
+		free(str);
 }
 
 int			draw(t_data *data)
@@ -97,6 +107,11 @@ int			draw(t_data *data)
 		ft_triangle(data);
 	else if (data->display->type == 3)
 		ft_kochs_snowflake(data);
+	if (data->img.size_l <= 100)
+	{
+		ft_putendl("Need more memory...");
+		exit(0);
+	}
 	ft_draw_px(data, WIN_W2, WIN_H2, 0xff0000);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);

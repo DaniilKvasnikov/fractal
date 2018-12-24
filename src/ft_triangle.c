@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 04:44:17 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:26:03 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 12:40:08 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	body_triangle(t_data *data, float sc)
 		dot[X_P] = (dot[X_P] + dots_[next * 2]) / 2;
 		dot[Y_P] = (dot[Y_P] + dots_[next * 2 + 1]) / 2;
 	}
+	free(dots_);
 }
 
 void		ft_triangle(t_data *data)

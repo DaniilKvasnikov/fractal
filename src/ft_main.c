@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:56:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:59:21 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 12:39:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int			main(int argc, char **argv)
 	mlx_hook(data.mlx_win, 3, 1L << 3, key_release, &data);
 	mlx_hook(data.mlx_win, 4, 1L << 4, mouse_press, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_move, &data);
-	mlx_hook(data.mlx_win, 17, 1L << 17, mouse_move, &data);
+	mlx_hook(data.mlx_win, 17, 1L << 17, ft_close, &data);
 	mlx_loop(data.mlx_ptr);
+	ft_close(&data);
 	return (0);
 }
