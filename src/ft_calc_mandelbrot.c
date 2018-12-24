@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:45:19 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 01:46:23 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 09:15:51 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	body_mandelbrot(double *pq, int nmax)
 	{
 		res = ft_get_idx(nmax, pq[0], pq[1]);
 		return ((res < nmax) *
-		ft_get_color_mandelbrot(ft_get_idx(nmax, pq[0], pq[1]), nmax));
+		ft_get_color_mandelbrot(ft_get_idx(nmax, pq[0], pq[1])));
 	}
 }
 

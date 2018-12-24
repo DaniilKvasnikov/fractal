@@ -6,13 +6,13 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 06:40:13 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 09:07:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int			key_release(int key, t_data *data)
+int				key_release(int key, t_data *data)
 {
 	if (key == 53)
 		exit(0);
@@ -38,7 +38,7 @@ int			key_release(int key, t_data *data)
 	return (1);
 }
 
-int			mouse_move(int x, int y, t_data *data)
+int				mouse_move(int x, int y, t_data *data)
 {
 	if (x >= 0 && x < WIN_W &&
 		y >= 0 && y < WIN_H &&
@@ -55,15 +55,25 @@ int			mouse_move(int x, int y, t_data *data)
 	return (0);
 }
 
-int			mouse_press(int button, int x, int y, t_data *data)
+static float	getscale(int type, float scale)
+{
+	if (type == 0)
+		return (scale);
+	else if (type == 1)
+		return (1 / scale);
+	else if (type == 2)
+		return (scale);
+	else if (type == 3)
+		return (1 / scale);
+	return (1);
+}
+
+int				mouse_press(int button, int x, int y, t_data *data)
 {
 	float scale;
 
 	clearwin(data);
-	if (data->display->type == 0)
-		scale = data->display->scale;
-	else if (data->display->type == 1)
-		scale = 1 / data->display->scale;
+	scale = getscale(data->display->type, data->display->scale);
 	if (button == 5)
 	{
 		data->display->global_x -= 2 * ((x - WIN_W2) * scale) / (float)WIN_W2;

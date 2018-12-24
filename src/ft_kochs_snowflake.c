@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 05:51:04 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 07:21:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 09:04:05 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static t_kochs	inkochs(float *p1, float *p2, float *p3)
 	return (obj);
 }
 
-static void		drawlines(t_data *data, t_kochs kochs)
+static void		drawlines(t_data *data, t_kochs kochs, int iter)
 {
-	line_fast(data, kochs.p1, kochs.p2, 0xffffff);
-	line_fast(data, kochs.p2, kochs.p3, 0xffffff);
-	line_fast(data, kochs.p3, kochs.p1, 0xffffff);
+	line_fast(data, kochs.p1, kochs.p2, 0xff0000 + iter * 25);
+	line_fast(data, kochs.p2, kochs.p3, 0x00ff00 + iter * 25);
 }
 
 static void		fractal(t_data *data, t_kochs kochs, int iter)
@@ -52,7 +51,7 @@ static void		fractal(t_data *data, t_kochs kochs, int iter)
 		(kochs.p2[Y_P] + kochs.p1[Y_P]) / 2);
 		set(pn, (4 * ps[X_P] - kochs.p3[X_P]) / 3,
 		(4 * ps[Y_P] - kochs.p3[Y_P]) / 3);
-		drawlines(data, inkochs(p4, pn, p5));
+		drawlines(data, inkochs(p4, pn, p5), iter);
 		fractal(data, inkochs(p4, pn, p5), iter - 1);
 		fractal(data, inkochs(pn, p5, p4), iter - 1);
 		set(ps, (2 * kochs.p1[X_P] + kochs.p3[X_P]) / 3,
@@ -69,17 +68,22 @@ void			ft_kochs_snowflake(t_data *data)
 	float point1[2];
 	float point2[2];
 	float point3[2];
+	float scale;
 
-	point1[X_P] = 100.0;
-	point1[Y_P] = 300.0;
+	scale = data->display->scale;
+	point1[X_P] = WIN_W2 - 400 * scale;
+	point1[Y_P] = WIN_H2 - 400 * scale;
 	point2[X_P] = WIN_W2;
-	point2[Y_P] = WIN_H - 100;
-	point3[X_P] = WIN_W - 100;
-	point3[Y_P] = 300.0;
+	point2[Y_P] = WIN_H2;
+	point3[X_P] = WIN_W2 + 400 * scale;
+	point3[Y_P] = WIN_H2 - 400 * scale;
 	line_fast(data, point1, point2, 0xffffff);
 	line_fast(data, point2, point3, 0xffffff);
 	line_fast(data, point3, point1, 0xffffff);
-	fractal(data, inkochs(point1, point2, point3), 10);
-	fractal(data, inkochs(point2, point3, point1), 10);
-	fractal(data, inkochs(point3, point1, point2), 10);
+	fractal(data, inkochs(point1, point2, point3),
+	data->display->max_iter / 10);
+	fractal(data, inkochs(point2, point3, point1),
+	data->display->max_iter / 10);
+	fractal(data, inkochs(point3, point1, point2),
+	data->display->max_iter / 10);
 }
