@@ -6,13 +6,13 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:49:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 03:25:14 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 10:58:08 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		ft_get_idx(float *z0, float r, float *c, int n)
+static int				ft_get_idx(float *z0, float r, float *c, int n)
 {
 	float		res[2];
 	float		temp;
@@ -36,13 +36,31 @@ static int		ft_get_idx(float *z0, float r, float *c, int n)
 	return (index);
 }
 
-static int		body_julia(float *z, float r2, float *d, int max_iter)
+static t_julia_block	initblock(float *z, float r2, float *d, int max_iter)
 {
-	return (ft_get_color_julia(
-		(ft_get_idx(z, r2, d, max_iter) - 1), max_iter, z, r2));
+	t_julia_block block;
+
+	block.z = z;
+	block.r2 = r2;
+	block.d = d;
+	block.max_iter = max_iter;
+	return (block);
 }
 
-int				*ft_calc_julia(t_data *data, float *r, float *d, float dw)
+static int				body_julia(t_data *data, t_julia_block block)
+{
+	double	val;
+	int		value;
+	int		min;
+
+	min = 0;
+	value = ft_get_idx(block.z, block.r2, block.d, block.max_iter) - 1;
+	val = (double)(value - min) / (double)(block.max_iter - min);
+	return (ft_get_color_julia(data, val, block.z, block.r2));
+}
+
+int						*ft_calc_julia(t_data *data, float *r,
+										float *d, float dw)
 {
 	int			index[2];
 	float		z[2];
@@ -64,8 +82,8 @@ int				*ft_calc_julia(t_data *data, float *r, float *d, float dw)
 		{
 			z[X_P] = min[X_P] + index[0] * step[X_P];
 			z[Y_P] = min[Y_P] + index[1] * step[Y_P];
-			xy_idx[index[0] + index[1] * (WIN_W)] =
-				body_julia(z, r[1], d, data->display->max_iter);
+			xy_idx[index[0] + index[1] * (WIN_W)] = body_julia(data,
+					initblock(z, r[1], d, data->display->max_iter));
 		}
 	}
 	return (xy_idx);

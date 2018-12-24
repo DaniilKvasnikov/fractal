@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:37:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 04:25:55 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:14:45 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_mandelbrot.h"
 
 static void	draw_mandelbrot(t_data *data, int *pres)
 {
@@ -30,11 +30,16 @@ static void	draw_mandelbrot(t_data *data, int *pres)
 
 static void	mandelbrot(t_data *data, double *min, double range, int nmax)
 {
-	int		*pres;
+	int					*pres;
+	t_mandelbrot_block	block;
 
 	if ((pres = (int *)malloc(sizeof(int) * WIN_W * WIN_H)) == NULL)
 		return ;
-	ft_calc_mandelbrot(range, min, nmax, pres);
+	block.range = range;
+	block.min = min;
+	block.nmax = nmax;
+	block.pres = pres;
+	ft_calc_mandelbrot(data, block);
 	draw_mandelbrot(data, pres);
 	free(pres);
 }

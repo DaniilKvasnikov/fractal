@@ -6,16 +6,14 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 09:19:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:14:23 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "libft.h"
-# include <mlx.h>
-# include <math.h>
+# include "ft_julia.h"
 
 # define WIN_W 1024
 # define WIN_H 1024
@@ -45,6 +43,7 @@ typedef struct	s_display
 	float		global_y;
 	int			type;
 	int			max_iter;
+	int			colors;
 }				t_display;
 
 typedef struct	s_img
@@ -78,12 +77,10 @@ void			clearwin(t_data *data);
 int				draw(t_data *data);
 void			line_fast(t_data *env, float *p1, float *p2, int color);
 void			ft_draw_mandelbrot(t_data *data);
-void			ft_calc_mandelbrot(double range,
-				double *min, int nmax, int *pres);
-int				ft_get_color_mandelbrot(int n);
 void			ft_draw_julia(t_data *data);
 int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
-int				ft_get_color_julia(int value, int max, float *p, double r);
+int				ft_get_color_julia(t_data *data,
+					double val, float *p, double r);
 void			ft_triangle(t_data *data);
 void			ft_kochs_snowflake(t_data *data);
 

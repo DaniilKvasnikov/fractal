@@ -6,11 +6,19 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 09:07:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:25:21 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int		change_color(int key, t_data *data)
+{
+	if (key == 18)
+		data->display->colors = 1;
+	else if (key == 19)
+		data->display->colors = 2;
+}
 
 int				key_release(int key, t_data *data)
 {
@@ -31,6 +39,7 @@ int				key_release(int key, t_data *data)
 		data->display->max_iter += 1;
 	else if (key == 92)
 		data->display->max_iter -= 1;
+	change_color(key, data);
 	if (data->display->max_iter <= 0)
 		data->display->max_iter = 10;
 	clearwin(data);

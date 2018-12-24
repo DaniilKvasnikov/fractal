@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:45:19 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 09:15:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:16:00 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_mandelbrot.h"
 
 static int	ft_get_idx(int nmax, double p, double q)
 {
@@ -32,7 +32,7 @@ static int	ft_get_idx(int nmax, double p, double q)
 	return (n);
 }
 
-static int	body_mandelbrot(double *pq, int nmax)
+static int	body_mandelbrot(t_data *data, double *pq, int nmax)
 {
 	double	cardio;
 	int		res;
@@ -45,11 +45,11 @@ static int	body_mandelbrot(double *pq, int nmax)
 	{
 		res = ft_get_idx(nmax, pq[0], pq[1]);
 		return ((res < nmax) *
-		ft_get_color_mandelbrot(ft_get_idx(nmax, pq[0], pq[1])));
+		ft_get_color_mandelbrot(data, ft_get_idx(nmax, pq[0], pq[1])));
 	}
 }
 
-void		ft_calc_mandelbrot(double range, double *min, int nmax, int *pres)
+void		ft_calc_mandelbrot(t_data *data, t_mandelbrot_block block)
 {
 	double	dp;
 	double	pq[2];
@@ -58,16 +58,16 @@ void		ft_calc_mandelbrot(double range, double *min, int nmax, int *pres)
 	int		j;
 
 	index = -1;
-	dp = range / (WIN_W - 1);
+	dp = block.range / (WIN_W - 1);
 	j = -1;
 	while (++j < WIN_H)
 	{
-		pq[1] = min[1] + j * dp;
+		pq[1] = block.min[1] + j * dp;
 		i = -1;
 		while (++i < WIN_W)
 		{
-			pq[0] = min[0] + i * dp;
-			pres[++index] = body_mandelbrot(pq, nmax);
+			pq[0] = block.min[0] + i * dp;
+			block.pres[++index] = body_mandelbrot(data, pq, block.nmax);
 		}
 	}
 }

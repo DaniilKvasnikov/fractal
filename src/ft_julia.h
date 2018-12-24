@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_color_mandelbrot.c                          :+:      :+:    :+:   */
+/*   ft_julia.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/24 01:41:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:17:59 by rrhaenys         ###   ########.fr       */
+/*   Created: 2018/12/24 10:40:06 by rrhaenys          #+#    #+#             */
+/*   Updated: 2018/12/24 11:23:59 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mandelbrot.h"
+#ifndef FT_JULIA_H
+# define FT_JULIA_H
 
-int	ft_get_color_mandelbrot(t_data *data, int n)
+# include "libft.h"
+# include <mlx.h>
+# include <math.h>
+
+typedef struct	s_julia_block
 {
-	if (data->display->colors == 1)
-		return (0xffffff * ((n % 0xffffff)));
-	return (0x0000ff + 0x100000 * (n % 25));
-}
+	float	*z;
+	float	r2;
+	float	*d;
+	int		max_iter;
+}				t_julia_block;
+
+#endif

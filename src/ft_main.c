@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:56:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 09:20:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:18:29 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	start_par(t_data *data, int type)
 	data->display->global_y = 0;
 	data->display->scale = 1;
 	data->display->max_iter = 100;
+	data->display->colors = 1;
 }
 
 int			main(int argc, char **argv)

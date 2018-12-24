@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 05:51:04 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 09:04:05 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:26:18 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,14 @@ static t_kochs	inkochs(float *p1, float *p2, float *p3)
 
 static void		drawlines(t_data *data, t_kochs kochs, int iter)
 {
-	line_fast(data, kochs.p1, kochs.p2, 0xff0000 + iter * 25);
-	line_fast(data, kochs.p2, kochs.p3, 0x00ff00 + iter * 25);
+	int color;
+
+	if (data->display->colors == 1)
+		color = 0xff0000 + iter * 25;
+	else
+		color = 0x0f0f00 + iter * 25;
+	line_fast(data, kochs.p1, kochs.p2, color);
+	line_fast(data, kochs.p2, kochs.p3, color);
 }
 
 static void		fractal(t_data *data, t_kochs kochs, int iter)
