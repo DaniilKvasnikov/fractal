@@ -6,12 +6,12 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 13:06:44 by rrhaenys          #+#    #+#              #
-#    Updated: 2018/12/23 20:18:59 by rrhaenys         ###   ########.fr        #
+#    Updated: 2018/12/24 07:27:06 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -Werror
 LIB = ./libft/libft.a
 SRC_DIR = src/
 SRC_FIL = $(shell ls src | grep -E "ft_.+\.c")
