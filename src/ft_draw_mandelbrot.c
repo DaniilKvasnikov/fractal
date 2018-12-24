@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:37:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 01:46:29 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 04:25:55 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	draw_mandelbrot(t_data *data, int *pres)
 	{
 		j = -1;
 		while (++j < (WIN_H))
-			ft_draw_px(data, j, i, pres[++index]);
+			ft_draw_px(data, i, j, pres[++index]);
 	}
 }
 
@@ -45,10 +45,10 @@ void		ft_draw_mandelbrot(t_data *data)
 	double	min[2];
 	double	range;
 
-	center[0] = -1;
-	center[1] = 0;
-	range = 1;
-	min[0] = center[0] - range / 2;
-	min[1] = center[1] - range / 2.5;
-	mandelbrot(data, min, 1, 1000);
+	center[0] = data->display->global_y / 2;
+	center[1] = -data->display->global_x / 2;
+	range = data->display->scale;
+	min[0] = center[0] - range;
+	min[1] = center[1] - range;
+	mandelbrot(data, min, 2 * range, data->display->max_iter);
 }

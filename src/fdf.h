@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 01:50:15 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 04:40:58 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@
 # define X_P 0
 # define Y_P 1
 
-typedef enum	e_type {
-	MANDELBROT,
-	JULIA,
-	OTHER
-}				t_type;
-
 typedef struct	s_display
 {
 	int			local_x;
@@ -39,7 +33,8 @@ typedef struct	s_display
 	float		scale;
 	float		global_x;
 	float		global_y;
-	t_type		type;
+	int			type;
+	int			max_iter;
 }				t_display;
 
 typedef struct	s_img
@@ -66,6 +61,7 @@ typedef struct	s_vertex
 
 int				key_release(int key, t_data *data);
 int				mouse_move(int x, int y, t_data *data);
+int				mouse_press(int button, int x, int y, t_data *data);
 int				ft_close(t_data *data);
 void			ft_draw_px(t_data *env, int x, int y, int color);
 void			clearwin(t_data *data);
@@ -76,7 +72,7 @@ void			ft_calc_mandelbrot(double range,
 				double *min, int nmax, int *pres);
 int				ft_get_color_mandelbrot(int n, int nmax);
 void			ft_draw_julia(t_data *data);
-int				*ft_calc_julia(int max_iter, float *r, float *d, float dw);
+int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
 int				ft_get_color_julia(int value, int max, float *p, double r);
 
 #endif

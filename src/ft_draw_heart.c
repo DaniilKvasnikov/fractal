@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 01:17:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/23 22:05:50 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 05:08:53 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ void		clearwin(t_data *data)
 		data->img.img_ptr, 0, 0);
 }
 
+static void	draw_status(t_data *data)
+{
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 0, 0xffffff, "scale=");
+	if (data->display->scale >= 1)
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff,
+			ft_itoa(data->display->scale));
+	else
+	{
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff, "1/");
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 80, 0, 0xffffff,
+			ft_itoa(1 / data->display->scale));
+	}
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 20, 0xffffff, "iter=");
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 50, 20, 0xffffff,
+		ft_itoa(data->display->max_iter));
+}
+
 int			draw(t_data *data)
 {
 	if (data->img.img_ptr == NULL)
@@ -49,7 +66,11 @@ int			draw(t_data *data)
 		ft_draw_mandelbrot(data);
 	else if (data->display->type == 1)
 		ft_draw_julia(data);
+	else if (data->display->type == 2)
+		ft_triangle(data);
+	ft_draw_px(data, WIN_W2, WIN_H2, 0xff0000);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
+	draw_status(data);
 	return (1);
 }

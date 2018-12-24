@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:49:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 01:53:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 03:25:14 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		body_julia(float *z, float r2, float *d, int max_iter)
 		(ft_get_idx(z, r2, d, max_iter) - 1), max_iter, z, r2));
 }
 
-int				*ft_calc_julia(int max_iter, float *r, float *d, float dw)
+int				*ft_calc_julia(t_data *data, float *r, float *d, float dw)
 {
 	int			index[2];
 	float		z[2];
@@ -50,10 +50,10 @@ int				*ft_calc_julia(int max_iter, float *r, float *d, float dw)
 	float		step[2];
 	float		min[2];
 
-	min[X_P] = -r[0] / dw;
-	min[Y_P] = -r[0] / dw;
-	step[X_P] = fabsf(((r[0] / dw) - min[X_P])) / (float)(WIN_W);
-	step[Y_P] = fabsf(((r[0] / dw) - min[Y_P])) / (float)(WIN_H);
+	min[X_P] = data->display->global_x - (r[0] / dw);
+	min[Y_P] = data->display->global_y - (r[0] / dw);
+	step[X_P] = fabsf((2 * (r[0] / dw))) / (float)(WIN_W);
+	step[Y_P] = fabsf((2 * (r[0] / dw))) / (float)(WIN_H);
 	if ((xy_idx = (int *)malloc(sizeof(int) * WIN_W * WIN_H)) == 0)
 		return (0);
 	index[0] = -1;
@@ -65,7 +65,7 @@ int				*ft_calc_julia(int max_iter, float *r, float *d, float dw)
 			z[X_P] = min[X_P] + index[0] * step[X_P];
 			z[Y_P] = min[Y_P] + index[1] * step[Y_P];
 			xy_idx[index[0] + index[1] * (WIN_W)] =
-				body_julia(z, r[1], d, max_iter);
+				body_julia(z, r[1], d, data->display->max_iter);
 		}
 	}
 	return (xy_idx);
