@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:42:38 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:06:37 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:30:16 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_julia.h"
 
 int		ft_get_color_julia(t_data *data, double val, float *p, double r)
 {

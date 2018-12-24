@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:49:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 10:58:08 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:30:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_julia.h"
 
 static int				ft_get_idx(float *z0, float r, float *c, int n)
 {

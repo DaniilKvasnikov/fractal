@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_julia.h                                         :+:      :+:    :+:   */
+/*   ft_kochs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/24 10:40:06 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:31:03 by rrhaenys         ###   ########.fr       */
+/*   Created: 2018/12/24 11:37:51 by rrhaenys          #+#    #+#             */
+/*   Updated: 2018/12/24 11:38:15 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_JULIA_H
-# define FT_JULIA_H
+#ifndef FT_KOCHS_H
+# define FT_KOCHS_H
 
 # include "fdf.h"
 
-typedef struct	s_julia_block
+typedef struct	s_kochs
 {
-	float	*z;
-	float	r2;
-	float	*d;
-	int		max_iter;
-}				t_julia_block;
-
-int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
-int				ft_get_color_julia(t_data *data,
-					double val, float *p, double r);
+	float		p1[2];
+	float		p2[2];
+	float		p3[2];
+}				t_kochs;
 
 #endif

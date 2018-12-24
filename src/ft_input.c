@@ -6,13 +6,13 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:25:21 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:39:59 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int		change_color(int key, t_data *data)
+static void		change_color(int key, t_data *data)
 {
 	if (key == 18)
 		data->display->colors = 1;
@@ -29,7 +29,7 @@ int				key_release(int key, t_data *data)
 		data->display->global_x = 0;
 		data->display->global_y = 0;
 		data->display->scale = 1;
-		data->display->max_iter = 100;
+		data->display->max_iter = 50;
 	}
 	else if (key == 69)
 		data->display->max_iter += 10;

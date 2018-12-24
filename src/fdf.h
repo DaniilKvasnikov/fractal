@@ -6,14 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:14:23 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:38:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "ft_julia.h"
+# include "libft.h"
+# include <math.h>
+# include <mlx.h>
 
 # define WIN_W 1024
 # define WIN_H 1024
@@ -26,13 +28,6 @@
 # define BLOCK_1(a, b, c, d) {a -= b; c += d;}
 # define BLOCK_2(a, b, c, d, e) {if ((a += e) >= b) BLOCK_1(a, b, c, d);}
 # define SGN(x) ((x < 0) ? -1 : ((x > 0) ? 1 : 0))
-
-typedef struct	s_kochs
-{
-	float		p1[2];
-	float		p2[2];
-	float		p3[2];
-}				t_kochs;
 
 typedef struct	s_display
 {
@@ -78,9 +73,6 @@ int				draw(t_data *data);
 void			line_fast(t_data *env, float *p1, float *p2, int color);
 void			ft_draw_mandelbrot(t_data *data);
 void			ft_draw_julia(t_data *data);
-int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
-int				ft_get_color_julia(t_data *data,
-					double val, float *p, double r);
 void			ft_triangle(t_data *data);
 void			ft_kochs_snowflake(t_data *data);
 

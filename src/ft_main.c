@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:56:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:18:29 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:59:21 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	start_par(t_data *data, int type)
 	data->display->global_x = 0;
 	data->display->global_y = 0;
 	data->display->scale = 1;
-	data->display->max_iter = 100;
+	data->display->max_iter = 50;
 	data->display->colors = 1;
 }
 
@@ -53,7 +53,7 @@ int			main(int argc, char **argv)
 		return (0);
 	if (((data.mlx_ptr = mlx_init()) == 0) ||
 		((data.mlx_win =
-		mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, argv[0])) == NULL) ||
+		mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, argv[1])) == NULL) ||
 		((data.display = (t_display *)malloc(sizeof(t_display))) == NULL))
 		return (1);
 	start_par(&data, type);

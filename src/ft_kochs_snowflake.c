@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 05:51:04 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:26:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:38:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_kochs.h"
 
 static void		set(float *p, float x, float y)
 {

@@ -6,11 +6,11 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 21:36:22 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 04:42:38 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2018/12/24 11:30:12 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "ft_julia.h"
 
 static float	ft_calc_r(float *p)
 {
