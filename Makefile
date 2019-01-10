@@ -6,7 +6,7 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 13:06:44 by rrhaenys          #+#    #+#              #
-#    Updated: 2018/12/24 07:27:06 by rrhaenys         ###   ########.fr        #
+#    Updated: 2019/01/10 03:20:42 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,14 @@ $(NAME): $(LIB) $(OBJ)
 	$(COMMAND) -o $(NAME) -g $(OBJ) $(LIB) $(INCLUDE) $(MLX)
 
 $(LIB):
+	make -C ./minilibx_macos
 	make -C ./libft
 
 .c.o:
 	$(COMMAND) $(FLAGS) $(INCLUDE) -g -c -o $@ $<
 
 clean:
+	make -C ./minilibx_macos clean
 	make -C ./libft clean
 	/bin/rm -f $(OBJ)
 
