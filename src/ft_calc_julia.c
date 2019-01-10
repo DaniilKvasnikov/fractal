@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:49:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:30:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:34:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int				body_julia(t_data *data, t_julia_block block)
 	min = 0;
 	value = ft_get_idx(block.z, block.r2, block.d, block.max_iter) - 1;
 	val = (double)(value - min) / (double)(block.max_iter - min);
-	return (ft_get_color_julia(data, val, block.z, block.r2));
+	return (ft_get_color_julia(data, val));
 }
 
 int						*ft_calc_julia(t_data *data, float *r,

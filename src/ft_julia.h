@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 10:40:06 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:31:03 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:35:11 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ typedef struct	s_julia_block
 
 int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
 int				ft_get_color_julia(t_data *data,
-					double val, float *p, double r);
+					double val);
 
 #endif
