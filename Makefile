@@ -27,14 +27,14 @@ $(NAME): $(LIB) $(OBJ)
 	$(COMMAND) -o $(NAME) -g $(OBJ) $(LIB) $(INCLUDE) $(MLX)
 
 $(LIB):
-	make -C ./minilibx_macos
+#	make -C ./minilibx_macos
 	make -C ./libft
 
 .c.o:
 	$(COMMAND) $(FLAGS) $(INCLUDE) -g -c -o $@ $<
 
 clean:
-	make -C ./minilibx_macos clean
+#	make -C ./minilibx_macos clean
 	make -C ./libft clean
 	/bin/rm -f $(OBJ)
 

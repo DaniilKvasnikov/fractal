@@ -24,7 +24,7 @@ static int	get_type(char *str)
 		return (3);
 	else
 	{
-		ft_putendl("usage: ./fdf ...");
+		ft_putendl("usage: ./fractol ...");
 		ft_putendl("eg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS");
 		return (-1);
 	}
@@ -48,7 +48,7 @@ int			main(int argc, char **argv)
 	int		type;
 
 	PRIN_RET((argc != 2),
-	"usage: ./fdf ...\neg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS");
+	"usage: ./fractol ...\neg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS");
 	if ((type = get_type(ft_toupper_str(argv[1]))) == -1)
 		return (0);
 	if (((data.mlx_ptr = mlx_init()) == 0) ||

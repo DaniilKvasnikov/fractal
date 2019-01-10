@@ -23,7 +23,7 @@ static void		change_color(int key, t_data *data)
 int				key_release(int key, t_data *data)
 {
 	if (key == 53)
-		exit(0);
+		ft_close(data);
 	else if (key == 49)
 	{
 		data->display->global_x = 0;

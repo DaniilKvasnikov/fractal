@@ -22,7 +22,6 @@ static void	ft_ptrdel(void *ap)
 int			ft_close(t_data *data)
 {
 	ft_ptrdel(data->mlx_ptr);
-	ft_ptrdel(data->mlx_ptr);
 	ft_ptrdel(data->mlx_win);
 	ft_ptrdel(data->display);
 	ft_ptrdel(data->img.img_ptr);
