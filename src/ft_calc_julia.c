@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:49:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 04:25:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 04:33:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int				body_julia(t_data *data, t_julia_block block)
 	return (ft_get_color_julia(data, val));
 }
 
-void		*thread_fun_j(void *point)
+void					*thread_fun_j(void *point)
 {
 	int				index[2];
 	float			z[2];

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 03:45:48 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 05:07:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ int				mouse_press(int button, int x, int y, t_data *data)
 		data->display->global_x -= ((x - WIN_W2) * scale) / (WIN_W2 / 2.0);
 		data->display->global_y -= ((y - WIN_H2) * scale) / (WIN_H2 / 2.0);
 		data->display->scale *= 1.0 +
-			(button == 5 && data->display->type == 1) +
+			(button == 5 && data->display->type != 0) +
 			(button == 4 && data->display->type == 0);
 		data->display->scale /= 1.0 +
-			(button == 4 && data->display->type == 1) +
+			(button == 4 && data->display->type != 0) +
 			(button == 5 && data->display->type == 0);
 	}
 	else if (button == 1)
