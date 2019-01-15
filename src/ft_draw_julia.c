@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 21:36:22 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:30:12 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 04:00:01 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,17 @@ static void		draw_julia(t_data *data, int *xy_idx)
 
 static void		julia(t_data *data, float dw, float *d)
 {
-	float		r[2];
-	int			*xy_idx;
+	float			r[2];
+	int				*xy_idx;
+	t_julia_bloc	bloc;
 
 	r[0] = ft_calc_r(d);
 	r[1] = (r[0] * r[0]);
-	xy_idx = ft_calc_julia(data, r, d, dw);
+	bloc.data = data;
+	bloc.r = r;
+	bloc.d = d;
+	bloc.dw = dw;
+	xy_idx = ft_calc_julia(&bloc);
 	draw_julia(data, xy_idx);
 	free(xy_idx);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 10:40:06 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/10 15:35:11 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 04:14:16 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@ typedef struct	s_julia_block
 	int		max_iter;
 }				t_julia_block;
 
-int				*ft_calc_julia(t_data *data, float *r, float *d, float dw);
+typedef struct	s_julia_bloc
+{
+	t_data	*data;
+	float	*r;
+	float	*d;
+	float	dw;
+	int		*xy_idx;
+	int		all;
+	int		part;
+}				t_julia_bloc;
+
+int				*ft_calc_julia(t_julia_bloc *bloc);
 int				ft_get_color_julia(t_data *data,
 					double val);
 

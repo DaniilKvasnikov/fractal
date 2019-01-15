@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 02:42:23 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 03:52:59 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ typedef struct	s_img
 
 typedef struct	s_data
 {
-	void			*mlx_ptr;
-	void			*mlx_win;
-	t_img			img;
-	t_display		*display;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	t_img		img;
+	t_display	*display;
 }				t_data;
 
 typedef struct	s_vertex
