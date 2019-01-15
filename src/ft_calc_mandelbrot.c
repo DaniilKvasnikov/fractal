@@ -6,11 +6,12 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 01:45:19 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:16:00 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 03:27:12 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_mandelbrot.h"
+#include <pthread.h>
 
 static int	ft_get_idx(int nmax, double p, double q)
 {
@@ -25,7 +26,7 @@ static int	ft_get_idx(int nmax, double p, double q)
 	while (n < nmax && (x * x) + (y * y) < 4)
 	{
 		xtemp = (x * x) - (y * y) + p;
-		y = 2 * x * y + q;
+		y = 2.0 * x * y + q;
 		x = xtemp;
 		n++;
 	}
@@ -49,25 +50,54 @@ static int	body_mandelbrot(t_data *data, double *pq, int nmax)
 	}
 }
 
-void		ft_calc_mandelbrot(t_data *data, t_mandelbrot_block block)
+void		*thread_fun(void *point)
 {
-	double	dp;
-	double	pq[2];
-	int		index;
-	int		i;
-	int		j;
+	t_mandelbrot_block	*block;
+	double				dp;
+	double				pq[2];
+	int					index[2];
+	int					boundaries[2];
 
-	index = -1;
-	dp = block.range / (WIN_W - 1);
-	j = -1;
-	while (++j < WIN_H)
+	block = (t_mandelbrot_block *)point;
+	boundaries[0] = (block->part / (float)block->all) * WIN_W - 1;
+	boundaries[1] = ((block->part + 1) / (float)block->all) * WIN_W;
+	dp = block->range / (WIN_W - 1);
+	index[1] = -1;
+	while (++index[1] < WIN_H)
 	{
-		pq[1] = block.min[1] + j * dp;
-		i = -1;
-		while (++i < WIN_W)
+		pq[1] = block->min[1] + index[1] * dp;
+		index[0] = boundaries[0];
+		while (++index[0] < boundaries[1])
 		{
-			pq[0] = block.min[0] + i * dp;
-			block.pres[++index] = body_mandelbrot(data, pq, block.nmax);
+			pq[0] = block->min[0] + index[0] * dp;
+			block->pres[index[1] * WIN_W + index[0]] =
+			body_mandelbrot(block->data, pq, block->nmax);
 		}
 	}
+	return (NULL);
+}
+
+void		ft_calc_mandelbrot(t_mandelbrot_block *block)
+{
+	int					size;
+	int					index;
+	pthread_t			*tid;
+	t_mandelbrot_block	*blocks;
+
+	size = 128;
+	block->all = size;
+	tid = (pthread_t *)malloc(sizeof(pthread_t) * size);
+	blocks = (t_mandelbrot_block *)malloc(sizeof(t_mandelbrot_block) * size);
+	index = -1;
+	while (++index < size)
+	{
+		blocks[index] = *block;
+		blocks[index].part = index;
+		(void)pthread_create(&tid[index], NULL, thread_fun, &blocks[index]);
+	}
+	index = -1;
+	while (++index < size)
+		pthread_join(tid[index], NULL);
+	free(tid);
+	free(blocks);
 }

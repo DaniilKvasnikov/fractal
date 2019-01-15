@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 01:17:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 12:48:39 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 03:21:19 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,24 @@ void		line_fast(t_data *env, float *p1, float *p2, int color)
 
 static void	draw_status(t_data *data)
 {
-	char *str;
+	char	*str;
+	int		color;
 
-	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 0, 0xffffff, "scale=");
+	color = 0xff0000;
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 0, color, "scale=");
 	if (data->display->scale >= 1)
-		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff,
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, color,
 			(str = ft_itoa(data->display->scale)));
 	else
 	{
-		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, 0xffffff, "1/");
-		mlx_string_put(data->mlx_ptr, data->mlx_win, 80, 0, 0xffffff,
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 60, 0, color, "1/");
+		mlx_string_put(data->mlx_ptr, data->mlx_win, 80, 0, color,
 			(str = ft_itoa(1 / data->display->scale)));
 	}
 	if (str != NULL)
 		free(str);
-	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 20, 0xffffff, "iter=");
-	mlx_string_put(data->mlx_ptr, data->mlx_win, 50, 20, 0xffffff,
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 0, 20, color, "iter=");
+	mlx_string_put(data->mlx_ptr, data->mlx_win, 50, 20, color,
 		(str = ft_itoa(data->display->max_iter)));
 	if (str != NULL)
 		free(str);

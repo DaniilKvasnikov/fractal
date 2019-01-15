@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rrhaenys <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 18:03:05 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/11/23 18:03:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 03:14:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	get_size(int n)
+static int	get_size(long long n)
 {
 	int		size;
 
@@ -30,10 +30,10 @@ static int	get_size(int n)
 	return (size);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long long n)
 {
-	char	*res;
-	int		index;
+	char		*res;
+	long long	index;
 
 	if (n == 0)
 		return (ft_strdup("0"));

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:37:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 11:14:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/15 02:13:18 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	mandelbrot(t_data *data, double *min, double range, int nmax)
 	block.min = min;
 	block.nmax = nmax;
 	block.pres = pres;
-	ft_calc_mandelbrot(data, block);
+	block.data = data;
+	ft_calc_mandelbrot(&block);
 	draw_mandelbrot(data, pres);
 	free(pres);
 }
