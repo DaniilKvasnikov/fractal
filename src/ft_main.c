@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 14:56:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2018/12/24 12:39:13 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:41:40 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ static int	get_type(char *str)
 		return (2);
 	else if (!(ft_strcmp("KOCHS", str)))
 		return (3);
+	else if (!(ft_strcmp("TREE", str)))
+		return (4);
 	else
 	{
 		ft_putendl("usage: ./fractol ...");
-		ft_putendl("eg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS");
+		ft_putendl("eg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS\n\tTREE");
 		return (-1);
 	}
 }
@@ -48,7 +50,8 @@ int			main(int argc, char **argv)
 	int		type;
 
 	PRIN_RET((argc != 2),
-	"usage: ./fractol ...\neg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\n\tKOCHS");
+	"usage: ./fractol ...\neg:\n\tMANDELBROT\n\tJULIA\n\tTRIANGLE\
+	\n\tKOCHS\n\tTREE");
 	if ((type = get_type(ft_toupper_str(argv[1]))) == -1)
 		return (0);
 	if (((data.mlx_ptr = mlx_init()) == 0) ||

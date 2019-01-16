@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 01:17:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 03:21:19 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:12:49 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int			draw(t_data *data)
 		ft_triangle(data);
 	else if (data->display->type == 3)
 		ft_kochs_snowflake(data);
+	else if (data->display->type == 4)
+		ft_drawtree(data);
 	if (data->img.size_l <= 100)
 	{
 		ft_putendl("Need more memory...");

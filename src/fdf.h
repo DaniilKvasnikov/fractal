@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 13:12:03 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 03:52:59 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:10:37 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void			ft_draw_mandelbrot(t_data *data);
 void			ft_draw_julia(t_data *data);
 void			ft_triangle(t_data *data);
 void			ft_kochs_snowflake(t_data *data);
+int				ft_drawtree(t_data *data);
 
 #endif
