@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 21:22:34 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/15 06:47:41 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:28:23 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ int				key_release(int key, t_data *data)
 
 int				mouse_move(int x, int y, t_data *data)
 {
+	int type;
+
+	type = data->display->type;
 	if (x >= 0 && x < WIN_W &&
 		y >= 0 && y < WIN_H &&
-		data->display->type == 1 &&
+		(type == 1 || type == 4) &&
 		data->display->scale == 1 &&
 		data->display->global_x == 0 &&
 		data->display->global_y == 0)

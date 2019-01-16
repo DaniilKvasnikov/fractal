@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 05:51:04 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/16 23:54:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:48:56 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,27 @@ static void		fractal(t_data *data, t_kochs kochs, int iter)
 	float p5[2];
 	float ps[2];
 	float pn[2];
-	float size;
 
-	size = abs((int)(kochs.p1[X_P] - kochs.p2[X_P])) + abs((int)(kochs.p2[X_P] - kochs.p3[X_P]));
-	if (iter > 0)
-	{
-		set(p4, (kochs.p2[X_P] + 2 * kochs.p1[X_P]) / 3,
-		(kochs.p2[Y_P] + 2 * kochs.p1[Y_P]) / 3);
-		set(p5, (2 * kochs.p2[X_P] + kochs.p1[X_P]) / 3,
-		(kochs.p1[Y_P] + 2 * kochs.p2[Y_P]) / 3);
-		set(ps, (kochs.p2[X_P] + kochs.p1[X_P]) / 2,
-		(kochs.p2[Y_P] + kochs.p1[Y_P]) / 2);
-		set(pn, (4 * ps[X_P] - kochs.p3[X_P]) / 3,
-		(4 * ps[Y_P] - kochs.p3[Y_P]) / 3);
-		drawlines(data, inkochs(p4, pn, p5), ((iter * 0x000010) % 0xffffff));
-		if ((kochs.p1[X_P] < 0 && kochs.p2[X_P] < 0 && kochs.p3[X_P] < 0) ||
-			(size < 10))
-			return ;
-		fractal(data, inkochs(p4, pn, p5), iter - 1);
-		fractal(data, inkochs(pn, p5, p4), iter - 1);
-		set(ps, (2 * kochs.p1[X_P] + kochs.p3[X_P]) / 3,
-		(2 * kochs.p1[Y_P] + kochs.p3[Y_P]) / 3);
-		set(pn, (2 * kochs.p2[X_P] + kochs.p3[X_P]) / 3,
-		(2 * kochs.p2[Y_P] + kochs.p3[Y_P]) / 3);
-		fractal(data, inkochs(kochs.p1, p4, ps), iter - 1);
-		fractal(data, inkochs(p5, kochs.p2, pn), iter - 1);
-	}
+	if ((iter <= 0) || ((abs((int)(kochs.p1[X_P] - kochs.p2[X_P])) +
+		abs((int)(kochs.p2[X_P] - kochs.p3[X_P]))) < 10))
+		return ;
+	set(p4, (kochs.p2[X_P] + 2 * kochs.p1[X_P]) / 3,
+	(kochs.p2[Y_P] + 2 * kochs.p1[Y_P]) / 3);
+	set(p5, (2 * kochs.p2[X_P] + kochs.p1[X_P]) / 3,
+	(kochs.p1[Y_P] + 2 * kochs.p2[Y_P]) / 3);
+	set(ps, (kochs.p2[X_P] + kochs.p1[X_P]) / 2,
+	(kochs.p2[Y_P] + kochs.p1[Y_P]) / 2);
+	set(pn, (4 * ps[X_P] - kochs.p3[X_P]) / 3,
+	(4 * ps[Y_P] - kochs.p3[Y_P]) / 3);
+	drawlines(data, inkochs(p4, pn, p5), ((iter * 0x000010) % 0xffffff));
+	fractal(data, inkochs(p4, pn, p5), iter - 1);
+	fractal(data, inkochs(pn, p5, p4), iter - 1);
+	set(ps, (2 * kochs.p1[X_P] + kochs.p3[X_P]) / 3,
+	(2 * kochs.p1[Y_P] + kochs.p3[Y_P]) / 3);
+	set(pn, (2 * kochs.p2[X_P] + kochs.p3[X_P]) / 3,
+	(2 * kochs.p2[Y_P] + kochs.p3[Y_P]) / 3);
+	fractal(data, inkochs(kochs.p1, p4, ps), iter - 1);
+	fractal(data, inkochs(p5, kochs.p2, pn), iter - 1);
 }
 
 void			ft_kochs_snowflake(t_data *data)
@@ -85,7 +80,7 @@ void			ft_kochs_snowflake(t_data *data)
 	point1[X_P] = WIN_W2 - 400 * scale;
 	point1[Y_P] = WIN_H2 - 400 * scale;
 	point2[X_P] = WIN_W2;
-	point2[Y_P] = WIN_H2 + 10 * scale;;
+	point2[Y_P] = WIN_H2 + 10 * scale;
 	point3[X_P] = WIN_W2 + 400 * scale;
 	point3[Y_P] = WIN_H2 - 400 * scale;
 	line_fast(data, point1, point2, 0xffffff);
