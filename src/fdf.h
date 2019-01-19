@@ -33,9 +33,9 @@ typedef struct	s_display
 {
 	int			local_x;
 	int			local_y;
-	float		scale;
-	float		global_x;
-	float		global_y;
+	double		scale;
+	double		global_x;
+	double		global_y;
 	int			type;
 	int			max_iter;
 	int			colors;
@@ -60,7 +60,7 @@ typedef struct	s_data
 
 typedef struct	s_vertex
 {
-	float		p[2];
+	double		p[2];
 }				t_vertex;
 
 int				key_release(int key, t_data *data);
@@ -70,11 +70,12 @@ int				ft_close(t_data *data);
 void			ft_draw_px(t_data *env, int x, int y, int color);
 void			clearwin(t_data *data);
 int				draw(t_data *data);
-void			line_fast(t_data *env, float *p1, float *p2, int color);
+void			line_fast(t_data *env, double *p1, double *p2, int color);
 void			ft_draw_mandelbrot(t_data *data);
 void			ft_draw_julia(t_data *data);
 void			ft_triangle(t_data *data);
 void			ft_kochs_snowflake(t_data *data);
 int				ft_drawtree(t_data *data);
+void			testcl(void);
 
 #endif

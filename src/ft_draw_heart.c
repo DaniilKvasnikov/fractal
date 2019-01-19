@@ -42,7 +42,7 @@ void		clearwin(t_data *data)
 		data->img.img_ptr, 0, 0);
 }
 
-void		line_fast(t_data *env, float *p1, float *p2, int color)
+void		line_fast(t_data *env, double *p1, double *p2, int color)
 {
 	int i;
 	int x[2];

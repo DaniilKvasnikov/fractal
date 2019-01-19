@@ -17,9 +17,9 @@
 
 typedef struct	s_kochs
 {
-	float		p1[2];
-	float		p2[2];
-	float		p3[2];
+	double		p1[2];
+	double		p2[2];
+	double		p3[2];
 }				t_kochs;
 
 #endif

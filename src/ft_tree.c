@@ -12,15 +12,15 @@
 
 #include "fdf.h"
 
-static int	ft_drawtree_body(t_data *data, float *pos, double a, double angle)
+static int	ft_drawtree_body(t_data *data, double *pos, double a, double angle)
 {
 	double	ang1;
 	double	ang2;
-	float	posnew[2];
+	double	posnew[2];
 	int		color;
 
-	ang1 = M_PI * ((data->display->local_x - WIN_W2) / (float)WIN_W2);
-	ang2 = M_PI * ((data->display->local_y - WIN_H2) / (float)WIN_H2);
+	ang1 = M_PI * ((data->display->local_x - WIN_W2) / (double)WIN_W2);
+	ang2 = M_PI * ((data->display->local_y - WIN_H2) / (double)WIN_H2);
 	if (data->display->colors == 1)
 		color = 0x00ff00;
 	else
@@ -39,9 +39,9 @@ static int	ft_drawtree_body(t_data *data, float *pos, double a, double angle)
 
 int			ft_drawtree(t_data *data)
 {
-	float	pos[2];
-	float	a;
-	float	angle;
+	double	pos[2];
+	double	a;
+	double	angle;
 
 	pos[0] = WIN_W2;
 	pos[1] = 0;

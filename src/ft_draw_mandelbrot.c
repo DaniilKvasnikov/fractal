@@ -51,8 +51,8 @@ void		ft_draw_mandelbrot(t_data *data)
 	double	min[2];
 	double	range;
 
-	center[0] = data->display->global_y / 2;
-	center[1] = -data->display->global_x / 2;
+	center[0] = data->display->global_y / 2.0;
+	center[1] = -data->display->global_x / 2.0;
 	range = data->display->scale;
 	min[0] = center[0] - range;
 	min[1] = center[1] - range;

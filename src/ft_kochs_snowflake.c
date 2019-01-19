@@ -12,13 +12,13 @@
 
 #include "ft_kochs.h"
 
-static void		set(float *p, float x, float y)
+static void		set(double *p, double x, double y)
 {
 	p[X_P] = x;
 	p[Y_P] = y;
 }
 
-static t_kochs	inkochs(float *p1, float *p2, float *p3)
+static t_kochs	inkochs(double *p1, double *p2, double *p3)
 {
 	t_kochs obj;
 
@@ -42,10 +42,10 @@ static void		drawlines(t_data *data, t_kochs kochs, int iter)
 
 static void		fractal(t_data *data, t_kochs kochs, int iter)
 {
-	float p4[2];
-	float p5[2];
-	float ps[2];
-	float pn[2];
+	double p4[2];
+	double p5[2];
+	double ps[2];
+	double pn[2];
 
 	if ((iter <= 0) || ((abs((int)(kochs.p1[X_P] - kochs.p2[X_P])) +
 		abs((int)(kochs.p2[X_P] - kochs.p3[X_P]))) < 10))
@@ -71,10 +71,10 @@ static void		fractal(t_data *data, t_kochs kochs, int iter)
 
 void			ft_kochs_snowflake(t_data *data)
 {
-	float point1[2];
-	float point2[2];
-	float point3[2];
-	float scale;
+	double point1[2];
+	double point2[2];
+	double point3[2];
+	double scale;
 
 	scale = data->display->scale;
 	point1[X_P] = WIN_W2 - 400 * scale;

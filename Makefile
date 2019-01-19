@@ -18,7 +18,7 @@ SRC_FIL = $(shell ls src | grep -E "ft_.+\.c")
 SRCS = $(addprefix  $(SRC_DIR), $(SRC_FIL))
 OBJ	= $(SRCS:.c=.o)
 INCLUDE =-Ilibft -Iminilibx_macos
-MLX = -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+MLX = -framework OpenCL -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 COMMAND = gcc
 
 all: $(NAME)

@@ -14,15 +14,15 @@
 
 static int	get_type(char *str)
 {
-	if (!(ft_strcmp("MANDELBROT", str)))
+	if (!(ft_strcmp("MANDELBROT", str)) || !(ft_strcmp("-M", str)))
 		return (0);
-	else if (!(ft_strcmp("JULIA", str)))
+	else if (!(ft_strcmp("JULIA", str)) || !(ft_strcmp("-J", str)))
 		return (1);
-	else if (!(ft_strcmp("TRIANGLE", str)))
+	else if (!(ft_strcmp("TRIANGLE", str)) || !(ft_strcmp("-T", str)))
 		return (2);
-	else if (!(ft_strcmp("KOCHS", str)))
+	else if (!(ft_strcmp("KOCHS", str)) || !(ft_strcmp("-K", str)))
 		return (3);
-	else if (!(ft_strcmp("TREE", str)))
+	else if (!(ft_strcmp("TREE", str)) || !(ft_strcmp("-T", str)))
 		return (4);
 	else
 	{
