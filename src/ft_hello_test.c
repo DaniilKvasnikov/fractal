@@ -26,7 +26,7 @@ void	ft_get_fun_code(t_opencl *obj_opencl)
 	fclose(fp);
 }
 
-void ft_opencl(int *buf1) {
+void ft_opencl(int *buf1, float *c) {
 	t_opencl	obj_opencl;
 	size_t		worksize=MEM_SIZE;
 	size_t		srcsize;
@@ -34,6 +34,7 @@ void ft_opencl(int *buf1) {
 	const char	**srcptr;
 	size_t		size;
 	cl_mem		mem1;
+	cl_mem		mem2;
 	cl_program	prog;
 	cl_kernel	k_rot13;
 
@@ -52,9 +53,12 @@ void ft_opencl(int *buf1) {
 		1, srcptr, &srcsize, &obj_opencl.error);
 	obj_opencl.error=clBuildProgram(prog, 0, NULL, "", NULL, NULL);
 	mem1=clCreateBuffer(obj_opencl.context, CL_MEM_READ_WRITE, size * sizeof(int), NULL, &obj_opencl.error);
+	mem2=clCreateBuffer(obj_opencl.context, CL_MEM_READ_WRITE, 2 * sizeof(float), NULL, &obj_opencl.error);
 	k_rot13=clCreateKernel(prog, "rot13", &obj_opencl.error);
 	clSetKernelArg(k_rot13, 0, sizeof(mem1), &mem1);
+	clSetKernelArg(k_rot13, 1, sizeof(mem2), &mem2);
 	obj_opencl.error=clEnqueueWriteBuffer(obj_opencl.cq, mem1, CL_FALSE, 0, size * sizeof(int), buf1, 0, NULL, NULL);
+	obj_opencl.error=clEnqueueWriteBuffer(obj_opencl.cq, mem2, CL_FALSE, 0, 2 * sizeof(float), c, 0, NULL, NULL);
 	obj_opencl.error=clEnqueueNDRangeKernel(obj_opencl.cq, k_rot13, 1, NULL, &worksize, &worksize, 0, NULL, NULL);
 	obj_opencl.error=clEnqueueReadBuffer(obj_opencl.cq, mem1, CL_FALSE, 0, size * sizeof(int), buf1, 0, NULL, NULL);
 	obj_opencl.error=clFinish(obj_opencl.cq);

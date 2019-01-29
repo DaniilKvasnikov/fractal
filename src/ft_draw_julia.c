@@ -53,22 +53,19 @@ static void		julia(t_data *data, float dw, float *d)
 
 #include <stdio.h>
 
-void	ft_test(int *buf1)
+void	ft_test(int *buf1, float *c)
 {
-	const size_t size = 1024 * 1024;
-	for(size_t i = 0; i < size; i++)
-		buf1[i] = 0x00ff00;
-	ft_opencl(buf1);
+	ft_opencl(buf1, c);
 }
 
 
 void			ft_draw_julia(t_data *data)
 {
-	ft_test(data->img.data);
-	return ;
 	float d[2];
 
 	d[X_P] = (data->display->local_x - WIN_W2) / (float)WIN_W2;
 	d[Y_P] = (data->display->local_y - WIN_H2) / (float)WIN_H2;
+	ft_test(data->img.data, d);
+	return ;
 	julia(data, data->display->scale, d);
 }

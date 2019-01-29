@@ -22,6 +22,6 @@ typedef struct  		s_opencl
 	size_t				source_size;
 }               		t_opencl;
 
-void					ft_opencl(int *buf1);
+void					ft_opencl(int *buf1, float *c);
 
 #endif
